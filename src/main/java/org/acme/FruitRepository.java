@@ -1,11 +1,11 @@
 package org.acme;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
+import javax.transaction.Transactional;
 
-public interface FruitRepository extends CrudRepository<Fruit, Long> {
-
-    List<Fruit> findByColor(String color);
-
+@Transactional
+@Repository
+public interface FruitRepository extends JpaRepository<Fruit, Long> {
 }

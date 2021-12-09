@@ -1,29 +1,25 @@
 package org.acme;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Fruit {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    private String color;
-
+	private float fibonacci;
 
     public Fruit() {
     }
 
-    public Fruit(String name, String color) {
-        this.name = name;
-        this.color = color;
+    public Fruit(String type) {
+        this.name = type;
     }
-
+    
     public Long getId() {
         return id;
     }
@@ -35,16 +31,32 @@ public class Fruit {
     public String getName() {
         return name;
     }
+    
+    public float getFibonacci() {
+    	return fibonacci;
+    }
 
     public void setName(String name) {
         this.name = name;
     }
-
-    public String getColor() {
-        return color;
+    
+    public void setFibonacci(int number) {
+    	this.fibonacci = fib(number)%10000;
     }
+    
+    public static long fib(int n) {
+    	   if(n == 0) {
+    	     return 0;
+    	   } else if (n == 1) {
+    	     return 1;
+    	   } else {
+    	      return fib(n-1) + fib(n-2); //der rekursive Aufruf
+    	   }
+    	}
 
-    public void setColor(String color) {
-        this.color = color;
+
+    @Override
+    public String toString() {
+        return "Fruit{ name='" + name + '\'' + " }";
     }
 }
